@@ -6,14 +6,11 @@
     <title>Agriflora – Mudas de Eucalipto</title>
 
     <!-- IMPORTAÇÃO DO CSS SEPARADO -->
- <!-- Link correto para o CSS local na pasta css -->
+    <!-- Link para o seu CSS local (que você mandou, com estilos para #mapa) -->
     <link rel="stylesheet" href="css/style.css">
 
-<!-- Se for necessário link absoluto para o GitHub Pages em um repositório com nome 'Site-agricultura': -->
-<link rel="stylesheet" href="style.css">
-
-    <!-- Leaflet CSS -->
-   <link rel="stylesheet" href="/Site-agricultura/css/style.css">
+    <!-- CSS do Leaflet (ESSENCIAL para o mapa funcionar - isso estava faltando!) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
     <header>
@@ -93,8 +90,10 @@
         <p class="renasem">(RENASEM – SP-01835/2008)</p>
     </section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- JavaScript do Leaflet (já estava correto) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
+        // Script do mapa (igual ao original, mas adicionei um console.log para depuração)
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -103,9 +102,13 @@
         });
         sections.forEach(section => observer.observe(section));
 
+        // Inicialização do mapa
         const map = L.map('mapa').setView([-21.7944, -48.1756], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         L.marker([-21.7944, -48.1756]).addTo(map).bindPopup('Agriflora – Rod. Washington Luiz, km 273').openPopup();
+
+        // Depuração: Verifique no console se o mapa carregou
+        console.log('Mapa inicializado:', map);
     </script>
 </body>
 </html>
